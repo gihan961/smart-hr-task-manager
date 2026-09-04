@@ -8,7 +8,22 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Enable CORS and JSON parsing
-app.use(cors());
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173',
+  /\.netlify\.app$/,   // any Netlify subdomain
+];
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+    const allowed = allowedOrigins.some(o =>
+      typeof o === 'string' ? o === origin : o.test(origin)
+    );
+    callback(allowed ? null : new Error('CORS not allowed'), allowed);
+  },
+  credentials: true
+}));
 app.use(express.json());
 
 // Routes

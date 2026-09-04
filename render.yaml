@@ -1,0 +1,15 @@
+﻿services:
+  - type: web
+    name: smart-hr-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        value: mongodb+srv://gihansenavirathna96_db_user:RujXLHbAd0AaKjzM@smarthr-cluster.qv12nu1.mongodb.net/smarthr?retryWrites=true&w=majority&appName=smarthr-cluster
+      - key: JWT_SECRET
+        value: smart-hr-rcm-super-secret-key-2026
+    healthCheckPath: /api/health
