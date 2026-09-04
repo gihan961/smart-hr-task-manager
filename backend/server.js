@@ -11,7 +11,9 @@ const PORT = process.env.PORT || 5000;
 const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:5173',
+  'https://smart-hr-task-manager.netlify.app',  // production frontend
   /\.netlify\.app$/,   // any Netlify subdomain
+  /\.vercel\.app$/,    // any Vercel subdomain
 ];
 app.use(cors({
   origin: (origin, callback) => {
